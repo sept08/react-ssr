@@ -1,5 +1,10 @@
-const express = require('express');
+import express from 'express';
+import React from 'react';
+import Home from './components/home';
+import { renderToString } from 'react-dom/server'
+
 const app = express();
+const content = renderToString(<Home />);
 
 app.get('/', (req, res) => {
     res.send(
@@ -8,8 +13,7 @@ app.get('/', (req, res) => {
                 <title>hello</title>
             </head>
             <body>
-                <h1>first</h1>
-                <p>hello world</p>
+                ${content}
             </body>
         </html>`
     );
