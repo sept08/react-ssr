@@ -1,9 +1,11 @@
 import express from 'express';
 import React from 'react';
-import Home from './components/home';
 import { renderToString } from 'react-dom/server'
+import Home from '../components/home';
 
 const app = express();
+app.use(express.static('public'));
+
 const content = renderToString(<Home />);
 
 app.get('/', (req, res) => {
@@ -13,7 +15,8 @@ app.get('/', (req, res) => {
                 <title>hello</title>
             </head>
             <body>
-                ${content}
+                <div id="root">${content}</div>
+                <script src="/index.js"></script>
             </body>
         </html>`
     );
