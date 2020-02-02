@@ -1,5 +1,18 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import Home from "../components/home";
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import routers from "../routers";
+import getStore from "../store";
 
-ReactDom.hydrate(<Home/>, document.getElementById('root'));
+const App = () => {
+    return (
+        <Provider store={getStore()}>
+            <BrowserRouter>
+                {routers}
+            </BrowserRouter>
+        </Provider>
+    )
+}
+
+ReactDom.hydrate(<App/>, document.getElementById('root'));
